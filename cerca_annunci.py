@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 
 def cerca_canton_ticino():
 
-    url = "https://www4.ti.ch/dfe/de/concorsi"
+    url = "https://www.concorsi.ti.ch/"
 
     offerte = []
 
