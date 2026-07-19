@@ -1,4 +1,5 @@
 import datetime
+from cerca_annunci import cerca_offerte
 
 
 def leggi_file(nome_file):
@@ -22,16 +23,6 @@ def carica_fonti():
     print(fonti)
 
 
-def cerca_offerte():
-
-    print("\nAvvio ricerca offerte lavoro...")
-    
-    # Questa parte verrà collegata ai motori di ricerca annunci
-    # nel prossimo passaggio
-
-    offerte = []
-
-    return offerte
 
 
 def genera_report(offerte):
