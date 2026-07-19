@@ -1,3 +1,4 @@
+from fonti_lavoro import cerca_tutte_fonti
 from filtro_profilo import filtra_offerte
 import datetime
 from cerca_annunci import cerca_offerte
@@ -47,6 +48,10 @@ if __name__ == "__main__":
     carica_fonti()
 
    risultati = cerca_offerte()
+
+altre_offerte = cerca_tutte_fonti()
+
+risultati.extend(altre_offerte)
 
 risultati = filtra_offerte(risultati)
 
