@@ -26,6 +26,9 @@ jobs:
         pip install -r requirements.txt
 
 
-    - name: Avvia agente
-      run: |
-        python test.py
+  - name: Avvia agente
+  env:
+    GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+
+  run: |
+    python test.py
