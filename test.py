@@ -1,12 +1,27 @@
 from cerca_annunci import cerca_offerte
+from fonti_lavoro import cerca_tutte_fonti
 
 
-risultati = cerca_offerte()
+risultati = []
+
+
+# Cerca Cantone Ticino
+risultati.extend(
+    cerca_offerte()
+)
+
+
+# Cerca altre fonti
+risultati.extend(
+    cerca_tutte_fonti()
+)
+
 
 
 print("====================")
 print("RISULTATI TROVATI")
 print("====================")
+
 
 
 if len(risultati) == 0:
