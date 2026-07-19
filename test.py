@@ -1,17 +1,35 @@
 from cerca_annunci import cerca_offerte
 from fonti_lavoro import cerca_tutte_fonti
+from analisi_ai import valuta_offerta
+
+
+def leggi_profilo():
+
+    with open(
+        "profilo.txt",
+        "r",
+        encoding="utf-8"
+    ) as file:
+
+        return file.read()
+
+
+
+profilo = leggi_profilo()
 
 
 risultati = []
 
 
-# Cerca Cantone Ticino
+# Ricerca Cantone Ticino
+
 risultati.extend(
     cerca_offerte()
 )
 
 
-# Cerca altre fonti
+# Ricerca altre fonti
+
 risultati.extend(
     cerca_tutte_fonti()
 )
@@ -19,7 +37,7 @@ risultati.extend(
 
 
 print("====================")
-print("RISULTATI TROVATI")
+print("ANALISI AI IN CORSO")
 print("====================")
 
 
@@ -33,13 +51,32 @@ else:
 
     for posto in risultati:
 
-        print("\nENTE:")
-        print(posto["ente"])
 
-        print("\nPOSIZIONE:")
-        print(posto["titolo"])
+        analisi = valuta_offerta(
+            posto,
+            profilo
+        )
 
-        print("\nLINK CANDIDATURA:")
-        print(posto["link"])
 
-        print("--------------------")
+        print("\n====================")
+
+        print(
+            posto["ente"]
+        )
+
+
+        print(
+            posto["titolo"]
+        )
+
+
+        print(
+            posto["link"]
+        )
+
+
+        print("\nVALUTAZIONE AI:")
+
+        print(
+            analisi
+        )
