@@ -12,7 +12,10 @@ def cerca_canton_ticino():
 
         pagina = requests.get(
             url,
-            timeout=20
+            timeout=20,
+            headers={
+                "User-Agent": "Mozilla/5.0"
+            }
         )
 
         pagina.raise_for_status()
@@ -24,17 +27,59 @@ def cerca_canton_ticino():
         )
 
 
-        testi = soup.get_text(
-            separator=" ",
-            strip=True
-        )
+        link_trovati = soup.find_all("a")
 
 
-        offerte.append({
-            "ente": "Cantone Ticino",
-            "testo": testi[:1000],
-            "link": url
-        })
+        for link in link_trovati:
+
+            titolo = link.get_text(
+                strip=True
+            )
+
+            indirizzo = link.get("href")
+
+
+            if titolo and indirizzo:
+
+                parole = [
+                    "econom",
+                    "finanz",
+                    "controller",
+                    "controlling",
+                    "amministr",
+                    "specialista",
+                    "responsabile",
+                    "analista",
+                    "project",
+                    "management"
+                ]
+
+
+                testo = titolo.lower()
+
+
+                if any(
+                    parola in testo
+                    for parola in parole
+                ):
+
+                    if indirizzo.startswith("/"):
+
+                        indirizzo = (
+                            "https://www.concorsi.ti.ch"
+                            + indirizzo
+                        )
+
+
+                    offerte.append({
+
+                        "ente": "Cantone Ticino",
+
+                        "titolo": titolo,
+
+                        "link": indirizzo
+
+                    })
 
 
     except Exception as errore:
@@ -56,6 +101,5 @@ def cerca_offerte():
     risultati.extend(
         cerca_canton_ticino()
     )
-
 
     return risultati
